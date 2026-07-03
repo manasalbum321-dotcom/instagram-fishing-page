@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram - Reset Password</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    width:400px;
+    background:#fff;
+    padding:30px;
+    border-radius:8px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+/* Instagram Icon */
+.logo-icon img{
+    width:32px;
+    height:32px;
+    display:block;
+}
+
+/* Instagram Text Logo */
+.logo img{
+    height:35px;
+    width:auto;
+    display:block;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:12px;
+    font-size:28px;
+}
+
+.description{
+    text-align:center;
+    color:#666;
+    font-size:15px;
+    line-height:1.5;
+    margin-bottom:25px;
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:4px;
+    font-size:16px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#0095f6;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    background:#0095f6;
+    color:#fff;
+    border:none;
+    border-radius:4px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1877f2;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <span class="logo-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Instagram_simple_icon.svg/250px-Instagram_simple_icon.svg.png"
+                 alt="Instagram Icon">
+        </span>
+
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1920px-Instagram_logo.svg.png"
+                 alt="Instagram">
+        </div>
+
+    </div>
+
+    <h2>Create a strong password</h2>
+
+    <p class="description">
+        Your password must be at least six characters and should include a combination of numbers,
+        letters and special characters (!$@%).
+    </p>
+
+    <div class="input-group">
+        <input type="password" placeholder="Current password">
+    </div>
+
+    <div class="input-group">
+        <input type="password" placeholder="New password">
+    </div>
+
+    <div class="input-group">
+        <input type="password" placeholder="New password, again">
+    </div>
+
+    <button>Reset Password</button>
+
+</div>
+<script type="module" src="instagram.js"></script>
+</body>
+</html>
